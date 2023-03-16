@@ -20,10 +20,10 @@ export class LoginController {
                         message: "Login encontrado Associado", token: jwt.
                             sign({ email: req.body.email }, jwtsecret.secretJWTU, { expiresIn: "48h" })
                     })
-            }else{
+            } else {
                 return res.status(401).json({ message: "Acesso Negado" })
             }
-        }else{
+        } else {
             return res.status(401).json({ message: "Acesso Negado" })
         }
     }

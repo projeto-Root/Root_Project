@@ -37,7 +37,7 @@ export class UserController {
         try {
             const users = await userRepository.find()
 
-            return res.json(users)
+            return res.status(200).json(users)
         } catch (error) {
             console.log(error)
             return res.status(500).json({ message: 'Internal Sever Error' })
@@ -62,11 +62,46 @@ export class UserController {
         try {
             const teachers = await teacherRepository.find()
 
-            return res.json(teachers)
+            return res.status(200).json(teachers)
         } catch (error) {
             console.log(error)
             return res.status(500).json({ message: 'Internal Sever Error' })
         }
     }
+    async listTeacherbyId(req: Request, res: Response) {
+        const { id } = req.params
+        try {
+            const teachers = await teacherRepository.findOneBy({
+                id: Number(id),
+            })
+
+            return res.status(200).json(teachers)
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ message: 'Internal Sever Error' })
+        }
+    }
+    async deleteTeacher(req: Request, res: Response) {
+        const { id } = req.params;
+        try {
+            const teachers = await teacherRepository.delete(id)
+            return res.status(200).json({ message: 'successfully deleted teacher' })
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ message: 'Internal Sever Error' })
+        }
+    }
+    async updateTeacher(req: Request, res: Response) {
+        const info = req.body
+        const { id } = req.params;
+        try {
+            const teachers = await teacherRepository.update({ id: Number(id) }, info);
+            return res.status(200).json({ message: 'successfully updated teacher' })
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ message: 'Internal Sever Error' })
+        }
+    }
+
 
 }
