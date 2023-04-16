@@ -5,8 +5,8 @@ import {
 } from 'typeorm'
 
 
-@Entity('users')
-export class User {
+@Entity('admins')
+export class Admin {
 	@PrimaryGeneratedColumn()
 	id: number
 

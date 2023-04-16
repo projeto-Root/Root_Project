@@ -1,13 +1,13 @@
 import { Request, Response } from 'express'
-import { userRepository } from '../repositories/userRepository'
+import { adminRepository } from '../repositories/adminRepository'
 import { teacherRepository } from '../repositories/teacherRepository'
 const bcrypt = require('bcryptjs');
 import ValitadionContract from "../validador/fluent-validator"
 
 
-export class UserController {
+export class AdminController {
 
-    async createUser(req: Request, res: Response) {
+    static async createUser(req: Request, res: Response) {
 
         let contract = new ValitadionContract();
 
@@ -23,8 +23,8 @@ export class UserController {
         }
 
         try {
-            const newUser = userRepository.create(info)
-            await userRepository.save(newUser)
+            const newUser = adminRepository.create(info)
+            await adminRepository.save(newUser)
 
             return res.status(201).json(newUser)
         } catch (error) {
@@ -33,9 +33,9 @@ export class UserController {
         }
     }
 
-    async listUser(req: Request, res: Response) {
+    static async listUser(req: Request, res: Response) {
         try {
-            const users = await userRepository.find()
+            const users = await adminRepository.find()
 
             return res.status(200).json(users)
         } catch (error) {
@@ -44,7 +44,7 @@ export class UserController {
         }
     }
 
-    async createTeacher(req: Request, res: Response) {
+    static async createTeacher(req: Request, res: Response) {
         const info = req.body
 
         try {
@@ -58,7 +58,7 @@ export class UserController {
         }
     }
 
-    async listTeacher(req: Request, res: Response) {
+    static async listTeacher(req: Request, res: Response) {
         try {
             const teachers = await teacherRepository.find()
 
@@ -68,7 +68,7 @@ export class UserController {
             return res.status(500).json({ message: 'Internal Sever Error' })
         }
     }
-    async listTeacherbyId(req: Request, res: Response) {
+    static async listTeacherbyId(req: Request, res: Response) {
         const { id } = req.params
         try {
             const teachers = await teacherRepository.findOneBy({
@@ -81,7 +81,7 @@ export class UserController {
             return res.status(500).json({ message: 'Internal Sever Error' })
         }
     }
-    async deleteTeacher(req: Request, res: Response) {
+    static async deleteTeacher(req: Request, res: Response) {
         const { id } = req.params;
         try {
             const teachers = await teacherRepository.delete(id)
@@ -91,7 +91,7 @@ export class UserController {
             return res.status(500).json({ message: 'Internal Sever Error' })
         }
     }
-    async updateTeacher(req: Request, res: Response) {
+    static async updateTeacher(req: Request, res: Response) {
         const info = req.body
         const { id } = req.params;
         try {
