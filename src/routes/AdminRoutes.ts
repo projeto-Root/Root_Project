@@ -4,12 +4,13 @@ import auth from "../midware/AuthMidleware"
 
 
 const routes = Router()
-routes.get('/Admin', auth, AdminController.listUser)
-routes.get('/Teacher', auth, AdminController.listTeacher)
-routes.get('/Teacher/:id', auth, AdminController.listTeacherbyId)
-routes.post('/Admin', auth, AdminController.createUser)
-routes.post('/Teacher', auth, AdminController.createTeacher)
-routes.put('/Teacher/:id', auth, AdminController.updateTeacher)
-routes.delete('/Teacher/:id', auth, AdminController.deleteTeacher)
+
+routes.get('/Admin', auth, AdminController.getAdmin)
+routes.get('/Admin/:id', auth, AdminController.getAdminById)
+routes.post('/Admin', auth, AdminController.createAdmin)
+routes.put('/Admin/:id', auth, AdminController.updateAdmin)
+routes.delete('/Admin/:id', auth, AdminController.deleteAdmin)
+
+
 
 export default routes
