@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { userRepository } from '../repositories/userRepository'
+import { adminRepository } from '../repositories/adminRepository'
 const bcrypt = require('bcryptjs');
 import { jwtsecret } from '../config/configAuth';
 const jwt = require('jsonwebtoken')
@@ -8,7 +8,7 @@ export class LoginController {
 
     async auth(req: Request, res: Response) {
 
-        const authlogin_valida = await userRepository.findOneBy({
+        const authlogin_valida = await adminRepository.findOneBy({
             email: req.body.email
         })
         if (authlogin_valida) {
