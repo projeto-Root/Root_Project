@@ -9,4 +9,4 @@ routes.post('/User', authPost, new UserController().createUser)
 routes.put('/User', authPost, new UserController().updateUser)
 routes.delete('/User', authPost, new UserController().deleteUser)
 
-export default routes
+ export default routes

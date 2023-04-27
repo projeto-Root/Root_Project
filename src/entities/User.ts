@@ -22,7 +22,7 @@ export class User {
 	password: string
 
 	@OneToMany(() => UserPost, userPost => userPost.user )
-	userPosts: UserPost[]
+	 userPosts: UserPost[]
 
 	
 }
