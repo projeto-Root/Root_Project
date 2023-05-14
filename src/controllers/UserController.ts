@@ -6,7 +6,7 @@ import ValitadionContract from "../validador/fluent-validator"
 
 export class UserController {
 
-    async createUser(req: Request, res: Response) {
+    static async createUser(req: Request, res: Response) {
 
         let contract = new ValitadionContract();
 
@@ -32,20 +32,21 @@ export class UserController {
         }
     }
 
-    async listUser(req: Request, res: Response) {
+    static async listUser(req: Request, res: Response) {
         try {
             const users = await userRepository.find({
-				relations: {
-					userPosts: true
-					
-				}})
+                relations: {
+                    userPosts: true
+
+                }
+            })
             return res.status(200).json(users)
         } catch (error) {
             console.log(error)
             return res.status(500).json({ message: 'Internal Sever Error' })
         }
     }
-    async updateUser(req: Request, res: Response) {
+    static async updateUser(req: Request, res: Response) {
         const info = req.body
         const { id } = req.params;
         try {
@@ -57,7 +58,7 @@ export class UserController {
         }
     }
 
-    async deleteUser(req: Request, res: Response) {
+    static async deleteUser(req: Request, res: Response) {
         const { id } = req.params;
         try {
             const users = await userRepository.delete(id)
@@ -69,4 +70,4 @@ export class UserController {
     }
 
 
- }
+}

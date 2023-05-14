@@ -6,7 +6,7 @@ import ValitadionContract from "../validador/fluent-validator"
 
 export class UserPostController {
 
-    async createUserPost(req: Request, res: Response) {
+    static async createUserPost(req: Request, res: Response) {
 
         let contract = new ValitadionContract();
 
@@ -31,7 +31,7 @@ export class UserPostController {
         }
     }
 
-    async listUserPost(req: Request, res: Response) {
+    static async listUserPost(req: Request, res: Response) {
         try {
             const userspost = await userpostRepository.find()
 
@@ -42,7 +42,7 @@ export class UserPostController {
         }
     }
 
-    async updateUserPost(req: Request, res: Response) {
+    static async updateUserPost(req: Request, res: Response) {
         const info = req.body
         const { id } = req.params;
         try {
@@ -53,7 +53,7 @@ export class UserPostController {
             return res.status(500).json({ message: 'Internal Sever Error' })
         }
     }
-    async deleteUserPost(req: Request, res: Response) {
+    static async deleteUserPost(req: Request, res: Response) {
         const { id } = req.params;
         try {
             const userspost = await userpostRepository.delete(id)

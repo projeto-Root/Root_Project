@@ -1,12 +1,12 @@
 import { Router } from 'express'
 import { UserController } from '../controllers/UserController'
-import authPost from "../midware/AuthUserMidleware"
+import auth from "../midware/AuthUserMidleware"
 
 
 const routes = Router()
-routes.get('/User', authPost, new UserController().listUser)
-routes.post('/User', authPost, new UserController().createUser)
-routes.put('/User', authPost, new UserController().updateUser)
-routes.delete('/User', authPost, new UserController().deleteUser)
+routes.get('/User', auth, UserController.listUser)
+routes.post('/User', auth, UserController.createUser)
+routes.put('/User', auth, UserController.updateUser)
+routes.delete('/User', auth, UserController.deleteUser)
 
- export default routes
+export default routes
