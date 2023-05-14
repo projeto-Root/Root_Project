@@ -4,7 +4,8 @@ import { LoginController } from '../controllers/LoginController'
 
 
 const routes = Router()
-routes.post('/auth', new LoginController().auth)
+routes.post('/authUser', LoginController.authUser)
+routes.post('/authAdmin', LoginController.authAdmin)
 
 
 export default routes

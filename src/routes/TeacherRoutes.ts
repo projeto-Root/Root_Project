@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import auth from '../midware/AuthMidleware'
+import auth from '../midware/AuthAdminMidleware'
 import { TeacherController } from '../controllers/TeacherController'
 
 
