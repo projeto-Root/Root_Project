@@ -7,7 +7,7 @@ interface AuthenticatedRequest extends Request {
   token?: string;
 }
 
-function auth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+function authUser(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   const authToken = req.headers['authorization'];
 
   if (authToken != undefined) {
@@ -30,4 +30,4 @@ function auth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   }
 }
 
-export default auth;
+export default authUser;

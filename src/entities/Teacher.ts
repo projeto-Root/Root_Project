@@ -10,22 +10,22 @@ export class Teacher {
 	@PrimaryGeneratedColumn()
 	id: number
 
-	@Column({ type: 'text' })
+	@Column()
 	name: string
 
-	@Column({ type: 'text' })
+	@Column()
 	photo: string
 
-	@Column({ type: 'text' })
+	@Column()
 	area: string
 
-	@Column({ type: 'text' })
+	@Column()
 	areaIcon: string
 
-	@Column({ type: 'text' })
+	@Column()
 	subArea: string
 
-	@Column({ type: 'text' })
+	@Column()
 	SubAreaIcon: string
 
 	
