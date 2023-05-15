@@ -5,6 +5,7 @@ import User from './UserRoutes'
 import Teacher from './TeacherRoutes'
 import Login from './LoginRoutes'
 import UserPost from './UserPostRoutes'
+import SoftTeam from './SoftTeamCardRoutes'
 
 export const routes = (app: Application) => {
 
