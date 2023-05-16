@@ -102,6 +102,8 @@ export class UserController {
             return res.status(500).json({ message: 'Internal Sever Error' })
         }
     }
-
+    async test(req: Request, res: Response) {
+        console.log(req.body)
+    }
 
 }

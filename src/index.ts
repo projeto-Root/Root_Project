@@ -11,14 +11,8 @@ AppDataSource.initialize().then(() => {
 
   routes(app)
 
-  const server = app.listen(PORT, () => {
+    app.listen(PORT, () => {
     console.log(`Servidor iniciado na porta ${PORT}`)
   })
 
-  process.on('SIGINT', () => {
-    server.close(() => {
-      console.log('Servidor encerrado')
-      process.exit(0)
-    })
-  })
 })
