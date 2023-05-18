@@ -6,7 +6,7 @@ import Teacher from './TeacherRoutes'
 import Login from './LoginRoutes'
 import UserPost from './UserPostRoutes'
 import SoftTeam from './SoftTeamCardRoutes'
-
+import CaliComp from './CaliRoutes'
 export const routes = (app: Application) => {
 
     app.use(Admin)
@@ -14,7 +14,8 @@ export const routes = (app: Application) => {
     app.use(Teacher)
     app.use(Login)
     app.use(UserPost)
-
+    app.use(SoftTeam)
+    app.use(CaliComp)
     app.get('/', (_req: Request, res: Response) => {
         res.status(200).send({ mensagem: 'Boas vindas à API' });
     })
