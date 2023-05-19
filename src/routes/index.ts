@@ -7,6 +7,7 @@ import Login from './LoginRoutes'
 import UserPost from './UserPostRoutes'
 import SoftTeam from './SoftTeamCardRoutes'
 import CaliComp from './CaliRoutes'
+import BulgadosCard from './BulgadosCardRoutes'
 export const routes = (app: Application) => {
 
     app.use(Admin)
@@ -16,6 +17,7 @@ export const routes = (app: Application) => {
     app.use(UserPost)
     app.use(SoftTeam)
     app.use(CaliComp)
+    app.use(BulgadosCard)
     app.get('/', (_req: Request, res: Response) => {
         res.status(200).send({ mensagem: 'Boas vindas à API' });
     })
