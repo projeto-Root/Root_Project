@@ -4,8 +4,8 @@ import auth from "../midware/AuthAdminMidleware"
 
 
 const routes = Router()
-routes.get('/BugadosCard', new BugadosCardController().listBugadosCard)
-routes.post('/BugadosCard', new BugadosCardController().createBugadosCard)
-routes.put('/BugadosCard/:id', new BugadosCardController().updateBugadosCard)
-routes.delete('/BugadosCard/:id', new BugadosCardController().deleteBugadosCard)
+routes.get('/BugadosCard',auth, new BugadosCardController().listBugadosCard)
+routes.post('/BugadosCard',auth, new BugadosCardController().createBugadosCard)
+routes.put('/BugadosCard/:id',auth, new BugadosCardController().updateBugadosCard)
+routes.delete('/BugadosCard/:id',auth, new BugadosCardController().deleteBugadosCard)
 export default routes

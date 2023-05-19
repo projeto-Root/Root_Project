@@ -7,7 +7,7 @@ import Login from './LoginRoutes'
 import UserPost from './UserPostRoutes'
 import SoftTeam from './SoftTeamCardRoutes'
 import CaliComp from './CaliRoutes'
-import BulgadosCard from './BulgadosCardRoutes'
+import BulgadosCard from './BugadosCardRoutes'
 export const routes = (app: Application) => {
 
     app.use(Admin)
