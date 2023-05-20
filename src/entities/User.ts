@@ -5,6 +5,7 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm'
 import { UserPost } from './UserPost'
+import { Like } from './Like'
 
 
 @Entity('users')
@@ -24,5 +25,6 @@ export class User {
 	@OneToMany(() => UserPost, userPost => userPost.user )
 	 userPosts: UserPost[]
 
-	
+	@OneToMany(() => Like, (like) => like.userId)
+  	likes: Like[];
 }
