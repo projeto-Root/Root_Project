@@ -16,7 +16,7 @@ export class CaliCard {
 	@Column({ type: 'varchar' })
 	position: string
 
-	@Column({ type: 'text'})
+	@Column({ type: 'text' })
 	photo: string
 
 }
