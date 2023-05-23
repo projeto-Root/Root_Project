@@ -3,7 +3,7 @@ import { caliRepository } from '../repositories/caliRepository'
 
 export class CaliCompController {
 
-    async listCali(req: Request, res: Response) {
+    static async listCali(req: Request, res: Response) {
         try {
             const CaliCard = await caliRepository.find()
 
@@ -14,8 +14,10 @@ export class CaliCompController {
         }
     }
 
-    async createCali(req: Request, res: Response) {
+    static async createCali(req: Request, res: Response) {
+        const file = req.file?.filename
         const info = req.body
+        info.photo = file
 
         try {
             const newCaliCard = caliRepository.create(info)
@@ -30,8 +32,10 @@ export class CaliCompController {
 
 
 
-    async updateCali(req: Request, res: Response) {
+    static async updateCali(req: Request, res: Response) {
+        const file = req.file?.filename
         const info = req.body
+        info.photo = file
         const { id } = req.params;
         try {
             const CaliCard = await caliRepository.update({ id: Number(id) }, info);
@@ -42,7 +46,7 @@ export class CaliCompController {
         }
     }
     
-    async deleteCali(req: Request, res: Response) {
+    static async deleteCali(req: Request, res: Response) {
         const { id } = req.params;
         try {
             const CaliCard = await caliRepository.delete(id)

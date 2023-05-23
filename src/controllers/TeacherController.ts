@@ -3,7 +3,19 @@ import { teacherRepository } from '../repositories/teacherRepository'
 
 export class TeacherController {
     static async createTeacher(req: Request, res: Response) {
+        const files = req.files;
         const info = req.body
+
+        if (Array.isArray(files)) {
+
+            info.photo = files[0].filename
+            info.areaIcon = files[1].filename
+            info.SubAreaIcon = files[2].filename
+
+        } else if (files) {
+            return res.status(500).json({ message: 'Internal Sever Error' })
+        }
+
         try {
             const newTeacher = teacherRepository.create(info)
             await teacherRepository.save(newTeacher)
@@ -17,7 +29,7 @@ export class TeacherController {
     static async getTeacher(req: Request, res: Response) {
         try {
             const teachers = await teacherRepository.find()
-            
+
             return res.status(200).json(teachers)
         } catch (error) {
             console.log(error)
@@ -25,7 +37,7 @@ export class TeacherController {
         }
     }
 
-    
+
     static async getTeacherById(req: Request, res: Response) {
         const { id } = req.params
         try {
@@ -52,7 +64,19 @@ export class TeacherController {
 
     static async updateTeacher(req: Request, res: Response) {
         const info = req.body
+        const files = req.files;
         const { id } = req.params;
+
+        if (Array.isArray(files)) {
+
+            info.photo = files[0].filename
+            info.areaIcon = files[1].filename
+            info.SubAreaIcon = files[2].filename
+
+        } else if (files) {
+            return res.status(500).json({ message: 'Internal Sever Error' })
+        }
+
         try {
             await teacherRepository.update({ id: Number(id) }, info);
             return res.status(200).json({ message: 'successfully updated teacher' })
@@ -62,3 +86,4 @@ export class TeacherController {
         }
     }
 }
+

@@ -3,7 +3,7 @@ import { bugadosRepository } from '../repositories/bugadosRepository'
 
 export class BugadosCardController {
 
-    async listBugadosCard(req: Request, res: Response) {
+    static async listBugadosCard(req: Request, res: Response) {
         try {
             const BugadosCard = await bugadosRepository.find()
 
@@ -14,8 +14,11 @@ export class BugadosCardController {
         }
     }
 
-    async createBugadosCard(req: Request, res: Response) {
+    static async createBugadosCard(req: Request, res: Response) {
+        const file = req.file?.filename
+        console.log(file)
         const info = req.body
+        info.photo = file
 
         try {
             const newBugadosCard = bugadosRepository.create(info)
@@ -30,8 +33,11 @@ export class BugadosCardController {
 
 
 
-    async updateBugadosCard(req: Request, res: Response) {
+    static async updateBugadosCard(req: Request, res: Response) {
+        const file = req.file?.filename
+        console.log(file)
         const info = req.body
+        info.photo = file
         const { id } = req.params;
         try {
             const BugadosCard = await bugadosRepository.update({ id: Number(id) }, info);
@@ -41,8 +47,8 @@ export class BugadosCardController {
             return res.status(500).json({ message: 'Internal Sever Error' })
         }
     }
-    
-    async deleteBugadosCard(req: Request, res: Response) {
+
+    static async deleteBugadosCard(req: Request, res: Response) {
         const { id } = req.params;
         try {
             const BugadosCards = await bugadosRepository.delete(id)
@@ -53,5 +59,5 @@ export class BugadosCardController {
         }
     }
 
-}   
+}
 
