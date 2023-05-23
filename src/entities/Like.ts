@@ -1,18 +1,23 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, Index } from 'typeorm';
-import { User } from './User';
-import { UserPost } from './UserPost';
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from 'typeorm';
+import {User} from './User';
+import {UserPost} from './UserPost';
 
-@Entity()
-@Index(['user', 'userPost'], { unique: true })
+@Entity('likes')
 export class Like {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
+  
+    @Column()
+    user_id: number;
 
-  @ManyToOne(() => User, (user) => user.likes)
-  @Column()
-  userId: number;
+    @Column()
+    userPost_id: number;
 
-  @ManyToOne(() => UserPost, (userPost) => userPost.likes)
-  @Column()
-  userPostId: number;
+    @ManyToOne(() => User, user => user.likes)
+    @JoinColumn({name: 'user_id'})
+    user: User;
+
+    @ManyToOne(() => User, userPost => userPost.likes)
+    @JoinColumn({name: 'userPost_id'})
+    userPost: UserPost;
 }
