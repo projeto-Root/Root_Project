@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 const bcrypt = require('bcryptjs');
 import ValitadionContract from "../validador/fluent-validator"
-import { userPostRepository } from '../repositories/userPostRepository';
+import {userPostRepository} from "../repositories/userpostRepository";
 
 
 export class UserPostController {

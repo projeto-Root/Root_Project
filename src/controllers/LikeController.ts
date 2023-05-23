@@ -4,7 +4,7 @@ import {likeRepository} from '../repositories/likeRepository';
 
 export class LikeController {
 
-    static async checkLike(req: Request, res: Response): Promise<Like | null> {
+    static async checkLike(req: Request, res: Response) {
         const {userIdParams, userPostIdParams} = req.params;
         const userId: number = parseInt(userIdParams);
         const userPostId: number = parseInt(userPostIdParams);
@@ -16,8 +16,9 @@ export class LikeController {
         });
     }
 
-    static async toggleLike(req: Request, res: Response): Promise<Response> {
+    static async toggleLike(req: Request, res: Response) {
         try {
+            //Recebe os ids do User e do UserPost
             const {userIdParams, userPostIdParams} = req.params;
             const userId: number = parseInt(userIdParams);
             const userPostId: number = parseInt(userPostIdParams);
