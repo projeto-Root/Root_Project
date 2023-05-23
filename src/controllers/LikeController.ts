@@ -1,30 +1,29 @@
-import { Request, Response } from 'express';
-import { Like } from '../entities/Like';
-import { likeRepository } from '../repositories/likeRepository';
+import {Request, Response} from 'express';
+import {Like} from '../entities/Like';
+import {likeRepository} from '../repositories/likeRepository';
 
 export class LikeController{
 
 static async checkLike(req: Request, res: Response): Promise<Like | null>{
     const { userIdParams, userPostIdParams } = req.params;
-    const userId: number = parseInt(userIdParams)
-    const userPostId: number = parseInt(userPostIdParams)
-    const existingLike = await likeRepository.findOne({
+    const userId: number = parseInt(userIdParams);
+    const userPostId: number = parseInt(userPostIdParams);
+    return await likeRepository.findOne({
         where: {
-          userId: userId,
-          userPostId: userPostId,
+            userId: userId,
+            userPostId: userPostId,
         },
-      });
-    return existingLike;
+    });
 }
 
 static async toggleLike(req: Request, res: Response): Promise<Response> {
   try {
     const { userIdParams, userPostIdParams } = req.params;
-    const userId: number = parseInt(userIdParams)
-    const userPostId: number = parseInt(userPostIdParams)
+    const userId: number = parseInt(userIdParams);
+    const userPostId: number = parseInt(userPostIdParams);
 
     // Verifique se existe um registro de Like com as duas chaves
-    const existingLike = await LikeController.checkLike(req, res)
+    const existingLike = await LikeController.checkLike(req, res);
     if (existingLike) {
         await likeRepository.delete(existingLike.id);
         return res.status(200).json({ message: 'Like retirado do sistema.' });
