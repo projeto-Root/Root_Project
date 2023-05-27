@@ -2,8 +2,9 @@ import { Request, Response } from 'express'
 import { userpostRepository } from '../repositories/userpostRepository'
 const bcrypt = require('bcryptjs');
 import ValitadionContract from "../validador/fluent-validator"
-
-
+import { commetRepository } from '../repositories/commentRepository';
+import { userRepository } from '../repositories/userRepository';
+import { Comment } from '../entities/Comment';
 export class UserPostController {
 
     static async createUserPost(req: Request, res: Response) {
@@ -63,6 +64,27 @@ export class UserPostController {
             return res.status(500).json({ message: 'Internal Sever Error' })
         }
     }
-
+    static async postComment(req: Request, res: Response) {
+        const  info  = req.body
+        try {
+            const user = await userRepository.findOne({where:{
+                id: Number(info.user_id)
+            },select:['id']})
+            if(!user){
+                return res.json('usuário não encontrado!')
+            }
+            const post = await userpostRepository.findOne({where:{id: Number(info.userpost_id)}, select:['id']})
+            if(!post){return res.json('post não encontrado!')}
+            const comment = new Comment
+            comment.descricao = info.descricao
+            comment.post = post
+            comment.user = user
+            await commetRepository.save(comment)
+            return res.status(200).json(comment)
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ message: 'Internal Sever Error' })
+        }
+    }
 
 }

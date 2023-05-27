@@ -27,6 +27,5 @@ export class Teacher {
 
 	@Column()
 	SubAreaIcon: string
-
 	
 }

@@ -3,7 +3,7 @@ import { caliRepository } from '../repositories/caliRepository'
 
 export class CaliCompController {
 
-    async listCali(req: Request, res: Response) {
+     async listCali(req: Request, res: Response) {
         try {
             const CaliCard = await caliRepository.find()
 

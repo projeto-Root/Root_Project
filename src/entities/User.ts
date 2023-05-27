@@ -5,7 +5,7 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm'
 import { UserPost } from './UserPost'
-
+import { Comment } from './Comment'
 
 @Entity('users')
 export class User {
@@ -23,6 +23,7 @@ export class User {
 
 	@OneToMany(() => UserPost, userPost => userPost.user )
 	 userPosts: UserPost[]
-
+	@OneToMany(() => Comment, comment => comment.user)
+	comments: Comment[];
 	
 }

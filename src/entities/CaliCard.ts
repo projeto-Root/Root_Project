@@ -5,18 +5,18 @@ import {
 } from 'typeorm'
 
 
-@Entity('CaliCards')
+@Entity('calicards')
 export class CaliCard {
 	@PrimaryGeneratedColumn()
 	id: number
 
-	@Column({ type: 'varchar' })
+	@Column()
 	name: string
 
-	@Column({ type: 'varchar' })
+	@Column()
 	position: string
 
-	@Column({ type: 'text'})
+	@Column()
 	photo: string
 
 }

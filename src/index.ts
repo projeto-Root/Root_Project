@@ -3,7 +3,7 @@ import { AppDataSource } from './data-source'
 import { routes } from './routes/index';
 const cors = require('cors')
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3100
 
 AppDataSource.initialize().then(() => {
   const app = express()
