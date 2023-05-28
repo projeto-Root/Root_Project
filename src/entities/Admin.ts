@@ -1,8 +1,10 @@
 import {
 	Column,
+	CreateDateColumn,
 	Entity,
 	OneToMany,
 	PrimaryGeneratedColumn,
+	UpdateDateColumn,
 } from 'typeorm'
 import { UserPost } from './UserPost'
 
@@ -21,8 +23,15 @@ export class Admin {
 	@Column()
 	password: string
 
-	@OneToMany(() => UserPost, userPost => userPost.user )
-	 userPosts: UserPost[]
+	@OneToMany(() => UserPost, userPost => userPost.user)
+	userPosts: UserPost[]
 
-	
+	@CreateDateColumn()
+	createdAt: Date;
+
+	@UpdateDateColumn()
+	updatedAt: Date;
 }
+
+
+

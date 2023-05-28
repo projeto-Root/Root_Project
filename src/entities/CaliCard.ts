@@ -1,7 +1,9 @@
 import {
 	Column,
+	CreateDateColumn,
 	Entity,
 	PrimaryGeneratedColumn,
+	UpdateDateColumn,
 } from 'typeorm'
 
 
@@ -16,7 +18,13 @@ export class CaliCard {
 	@Column({ type: 'varchar' })
 	position: string
 
-	@Column({ type: 'text'})
+	@Column({ type: 'text' })
 	photo: string
+
+	@CreateDateColumn()
+	createdAt: Date;
+
+	@UpdateDateColumn()
+	updatedAt: Date;
 
 }
