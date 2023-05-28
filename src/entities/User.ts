@@ -1,11 +1,13 @@
 import {
     Column,
+    CreateDateColumn,
     Entity,
     OneToMany,
     PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from 'typeorm'
-import {UserPost} from './UserPost'
-import {Like} from './Like'
+import { UserPost } from './UserPost'
+import { Like } from './Like'
 
 
 @Entity('users')
@@ -16,7 +18,7 @@ export class User {
     @Column()
     name: string
 
-    @Column({type: 'varchar', unique: true, length: 255})
+    @Column({ type: 'varchar', unique: true, length: 255 })
     email: string
 
     @Column()
@@ -27,5 +29,11 @@ export class User {
 
     @OneToMany(() => Like, like => like.user)
     likes: Like[]
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 
 }
