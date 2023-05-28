@@ -1,7 +1,8 @@
 import { Request, Response } from 'express'
 const bcrypt = require('bcryptjs');
 import ValitadionContract from "../validador/fluent-validator"
-import {userPostRepository} from "../repositories/userpostRepository";
+import { userPostRepository } from "../repositories/userpostRepository";
+import { format } from 'date-fns';
 
 
 export class UserPostController {
@@ -65,39 +66,46 @@ export class UserPostController {
     }
 
     static async listUserPostLike(req: Request, res: Response) {
-        var lista = []
         try {
             const usersPost = await userPostRepository.find({
-                relations: {
-                    likes: true
-
-                }
-            })
-            console.log(usersPost[0].likes.length)
-            return res.status(200).json(usersPost)
-        } catch (error) {
-            console.log(error)
-            return res.status(500).json({ message: 'Internal Sever Error' })
-        }
+              relations: {
+                likes: true
+              },
+              order: {
+                createdAt: 'DESC'
+              }
+            });
+        
+            const formattedUserPosts = usersPost.map(userPost => ({
+              ...userPost,
+              createdAt: format(userPost.createdAt, 'dd/MM/yyyy HH:mm:ss'),
+              updatedAt: format(userPost.updatedAt, 'dd/MM/yyyy HH:mm:ss')
+            }));
+        
+            return res.status(200).json(formattedUserPosts);
+          } catch (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Internal Server Error' });
+          }
     }
 
     static async listOrderUserPostLike(req: Request, res: Response) {
         try {
-          const usersPost = await userPostRepository.find({
-            relations: {
-              likes: true
-            }
-          });
-      
-          const sortedPosts = usersPost.sort((a, b) => b.likes.length - a.likes.length);
-      
-          return res.status(200).json(sortedPosts);
+            const usersPost = await userPostRepository.find({
+                relations: {
+                    likes: true
+                }
+            });
+
+            const sortedPosts = usersPost.sort((a, b) => b.likes.length - a.likes.length);
+
+            return res.status(200).json(sortedPosts);
         } catch (error) {
-          console.log(error);
-          return res.status(500).json({ message: 'Internal Server Error' });
+            console.log(error);
+            return res.status(500).json({ message: 'Internal Server Error' });
         }
-      }
-   
+    }
+
 
 
 }
