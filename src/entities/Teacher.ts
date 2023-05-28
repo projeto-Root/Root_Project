@@ -1,7 +1,9 @@
 import {
 	Column,
+	CreateDateColumn,
 	Entity,
 	PrimaryGeneratedColumn,
+	UpdateDateColumn,
 } from 'typeorm'
 
 
@@ -28,5 +30,11 @@ export class Teacher {
 	@Column()
 	SubAreaIcon: string
 
-	
+	@CreateDateColumn()
+	createdAt: Date;
+
+	@UpdateDateColumn()
+	updatedAt: Date;
+
+
 }
