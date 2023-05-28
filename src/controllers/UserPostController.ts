@@ -65,16 +65,18 @@ export class UserPostController {
         }
     }
     static async postComment(req: Request, res: Response) {
-        const  info  = req.body
+        const info = req.body
         try {
-            const user = await userRepository.findOne({where:{
-                id: Number(info.user_id)
-            },select:['id']})
-            if(!user){
+            const user = await userRepository.findOne({
+                where: {
+                    id: Number(info.user_id)
+                }, select: ['id']
+            })
+            if (!user) {
                 return res.json('usuário não encontrado!')
             }
-            const post = await userpostRepository.findOne({where:{id: Number(info.userpost_id)}, select:['id']})
-            if(!post){return res.json('post não encontrado!')}
+            const post = await userpostRepository.findOne({ where: { id: Number(info.userpost_id) }, select: ['id'] })
+            if (!post) { return res.json('post não encontrado!') }
             const comment = new Comment
             comment.descricao = info.descricao
             comment.post = post

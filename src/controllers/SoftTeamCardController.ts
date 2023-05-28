@@ -3,7 +3,7 @@ import { softTeamRepository } from '../repositories/softTeamCard'
 
 export class SoftTeamCardController {
 
-    async listSftCard(req: Request, res: Response) {
+    static async listSftCard(req: Request, res: Response) {
         try {
             const sftCard = await softTeamRepository.find()
 
@@ -14,8 +14,10 @@ export class SoftTeamCardController {
         }
     }
 
-    async createSftCard(req: Request, res: Response) {
+    static async createSftCard(req: Request, res: Response) {
+        const file = req.file?.filename
         const info = req.body
+        info.photo = file
 
         try {
             const newSftCard = softTeamRepository.create(info)
@@ -30,8 +32,10 @@ export class SoftTeamCardController {
 
 
 
-    async updateSftCard(req: Request, res: Response) {
+    static async updateSftCard(req: Request, res: Response) {
+        const file = req.file?.filename
         const info = req.body
+        info.photo = file
         const { id } = req.params;
         try {
             const SoftTeamCard = await softTeamRepository.update({ id: Number(id) }, info);
@@ -42,7 +46,7 @@ export class SoftTeamCardController {
         }
     }
     
-    async deleteSftCard(req: Request, res: Response) {
+    static async deleteSftCard(req: Request, res: Response) {
         const { id } = req.params;
         try {
             const SoftTeamCards = await softTeamRepository.delete(id)
