@@ -5,7 +5,7 @@ import auth from "../midware/AuthUserMidleware"
 
 const routes = Router()
 routes.get('/User', auth, UserController.listUser)
-routes.post('/User', auth, UserController.createUser)
+routes.post('/User', UserController.createUser)
 routes.put('/User', auth, UserController.updateUser)
 routes.delete('/User', auth, UserController.deleteUser)
 
