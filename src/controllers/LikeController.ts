@@ -40,4 +40,15 @@ export class LikeController {
             return res.status(500).json({message: 'Erro ao verificar like.'});
         }
     }
+    static async listLike(req: Request, res: Response) {
+        var lista = []
+        try {
+            const usersPost = await likeRepository.find()
+    
+            return res.status(200).json(usersPost)
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ message: 'Internal Sever Error' })
+        }
+    }
 }

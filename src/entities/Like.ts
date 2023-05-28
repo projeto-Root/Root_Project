@@ -17,7 +17,7 @@ export class Like {
     @JoinColumn({name: 'user_id'})
     user: User;
 
-    @ManyToOne(() => User, userPost => userPost.likes)
+    @ManyToOne(() => UserPost, userPost => userPost.likes)
     @JoinColumn({name: 'userPost_id'})
     userPost: UserPost;
 }
