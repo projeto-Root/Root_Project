@@ -1,15 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { User } from './User';
-import { Like } from './Like';
-import { Comment } from './Comment';
+import { UserPost } from './UserPost';
 
-@Entity('usersposts')
-export class UserPost {
+@Entity('comments')
+export class Comment {
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column()
-    description: string;
 
     @Column()
     content: string;
@@ -17,15 +13,16 @@ export class UserPost {
     @Column()
     user_id: number;
 
-    @ManyToOne(() => User, user => user.userPosts)
+    @Column()
+    userpost_id: number;
+
+    @ManyToOne(() => User, user => user.comment)
     @JoinColumn({ name: 'user_id' })
     user: User;
 
-    @OneToMany(() => Like, like => like.userPost)
-    likes: Like[]
-
-    @OneToMany(() => Comment, comment => comment.userPost)
-    comment: Comment[]
+    @ManyToOne(() => UserPost, userPost => userPost.comment)
+    @JoinColumn({ name: 'userpost_id' })
+    userPost: UserPost;
 
     @CreateDateColumn()
     createdAt: Date;

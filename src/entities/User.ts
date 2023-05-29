@@ -8,6 +8,7 @@ import {
 } from 'typeorm'
 import { UserPost } from './UserPost'
 import { Like } from './Like'
+import { Comment } from './Comment'
 
 
 @Entity('users')
@@ -29,6 +30,9 @@ export class User {
 
     @OneToMany(() => Like, like => like.user)
     likes: Like[]
+
+    @OneToMany(() => Comment, comment => comment.user)
+    comment: Comment[]
 
     @CreateDateColumn()
     createdAt: Date;
