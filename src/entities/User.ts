@@ -9,6 +9,7 @@ import {
 import { UserPost } from './UserPost'
 import { Like } from './Like'
 import { Comment } from './Comment'
+import { LikeComment } from './LikeComment';
 
 
 @Entity('users')
@@ -31,9 +32,13 @@ export class User {
     @OneToMany(() => Like, like => like.user)
     likes: Like[]
 
+    @OneToMany(() => LikeComment, likeComment => likeComment.user)
+    likeComment: LikeComment[]
+
     @OneToMany(() => Comment, comment => comment.user)
     comment: Comment[]
 
+    
     @CreateDateColumn()
     createdAt: Date;
 

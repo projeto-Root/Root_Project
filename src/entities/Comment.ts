@@ -1,6 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { User } from './User';
 import { UserPost } from './UserPost';
+import { LikeComment } from './LikeComment';
+
 
 @Entity('comments')
 export class Comment {
@@ -23,6 +25,9 @@ export class Comment {
     @ManyToOne(() => UserPost, userPost => userPost.comment)
     @JoinColumn({ name: 'userpost_id' })
     userPost: UserPost;
+
+    @OneToMany(() => LikeComment, likeComment => likeComment.user)
+    likeComment: LikeComment[]
 
     @CreateDateColumn()
     createdAt: Date;

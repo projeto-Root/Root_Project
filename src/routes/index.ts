@@ -10,6 +10,7 @@ import CaliComp from './CaliRoutes'
 import BulgadosCard from './BugadosCardRoutes'
 import Like from './LikeRoutes'
 import Comment from './CommentRoutes'
+import LikeComment from './LikeCommentRouts'
 export const routes = (app: Application) => {
 
     app.use(Admin)
@@ -22,6 +23,8 @@ export const routes = (app: Application) => {
     app.use(BulgadosCard)
     app.use(Like)
     app.use(Comment)
+    app.use(LikeComment)
+
 
     app.get('/', (_req: Request, res: Response) => {
         res.status(200).send({ mensagem: 'Boas vindas à API' });
