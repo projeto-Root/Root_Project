@@ -38,6 +38,8 @@ export class User {
     @OneToMany(() => Comment, comment => comment.user)
     comment: Comment[]
 
+    @Column({ type: 'boolean', nullable: true })
+    emailconfirmed: boolean;
     
     @CreateDateColumn()
     createdAt: Date;

@@ -17,11 +17,18 @@ export class UserController {
         if (!contract.isValid()) {
             return res.status(400).json(contract.errors())
         } else {
-            var info = req.body
+            var info = {
+                name:req.body.name,
+                email:req.body.email,
+                password:req.body.password,
+                emailconfirmed: false
+            }
+            
             info.password = await bcrypt.hash(info.password, 8);
         }
 
         try {
+            
             const newUser = userRepository.create(info)
             await userRepository.save(newUser)
 
