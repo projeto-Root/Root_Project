@@ -42,7 +42,7 @@ export class LikeCommentController {
         }
     }
     static async listLikeComment(req: Request, res: Response) {
-        var lista = []
+        
         try {
             const commentsPost = await likeCommentRepository.find()
     
